@@ -1,8 +1,10 @@
 # Trabalho: Tradutor de Linguagem
 
 Nome dos alunos e números de matrícula:
-* Aluno: ___________________________
-* Aluno: ___________________________
+
+- Aluno: Wanderson Oliveira Bueno
+- Aluno: Jhonata Batista Silva
+
 * Disciplina: Compiladores
 * Semestre: 2023/1
 * Data de entrega: 28/06/2023
@@ -24,11 +26,11 @@ O presente trabalho consiste da construção de um tradutor de código da lingua
 
 Utilize como base o código do trabalho do analisador sintático.
 
-Existem alguns códigos de exemplo no arquivo ```exemplos.md```
+Existem alguns códigos de exemplo no arquivo `exemplos.md`
 
 ## Tópicos de avaliação
 
-* Tradução para linguagem alvo
-* Detalhamento e justificativa das técnicas utilizadas
-* Análise dos códigos entregues
-* Apresentação expositiva dos resultados
+- Tradução para linguagem alvo
+- Detalhamento e justificativa das técnicas utilizadas
+- Análise dos códigos entregues
+- Apresentação expositiva dos resultados
