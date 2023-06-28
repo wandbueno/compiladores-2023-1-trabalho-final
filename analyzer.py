@@ -68,7 +68,10 @@ def funDecl():
     match(TokenClass.DELIMITADOR, ")")
     python_code = f"def {identifier}{parameters_str}:"
     block_code = block()
-    python_code += f"\n    {block_code}"
+    indentation_block = '\n'.join(
+        ['\t' + line for line in block_code.split('\n')])
+    python_code += f"\n{indentation_block}"
+
     return python_code
 
 
@@ -109,7 +112,9 @@ def ifStmt():
     match(TokenClass.DELIMITADOR, ")")
     then_statement = statement()
 
-    python_code = f"if {condition}:\n\t{then_statement}"
+    indentation_if = '\n'.join(
+        ['\t' + line for line in then_statement.split('\n')])
+    python_code = f"if {condition}:\n{indentation_if}"
 
     while check(TokenClass.PALAVRA_RESERVADA, "else") and not check(TokenClass.PALAVRA_RESERVADA, "if"):
         match(TokenClass.PALAVRA_RESERVADA, "else")
@@ -118,10 +123,15 @@ def ifStmt():
             match(TokenClass.PALAVRA_RESERVADA, "if")
             elif_condition = expression()
             elif_statement = statement()
-            python_code += f"elif {elif_condition}:\n\t{elif_statement}"
+            indentation_elif = '\n'.join(
+                ['\t' + line for line in elif_statement.split('\n')])
+
+            python_code += f"\nelif {elif_condition}:\n{indentation_elif}"
         else:
             else_statement = statement()
-            python_code += f"else:\n\t{else_statement}"
+            indentation_else = '\n'.join(
+                ['\t' + line for line in else_statement.split('\n')])
+            python_code += f"\nelse:\n{indentation_else}"
 
     return python_code
 
@@ -130,9 +140,7 @@ def printStmt():
     match(TokenClass.PALAVRA_RESERVADA, "print")
     content = expression()
     match(TokenClass.DELIMITADOR, ";")
-    # Adicionando a lógica de tradução
     python_code = f"print({content})"
-    # print(python_code)
     return python_code
 
 
@@ -169,7 +177,6 @@ def forStmt():
 
     statement()
 
-    # Adicione a lógica de tradução aqui, se necessário
     python_code = "for "
     if check(TokenClass.PALAVRA_RESERVADA, "var"):
         python_code += varDecl()
@@ -187,17 +194,16 @@ def whileStmt():
     match(TokenClass.PALAVRA_RESERVADA, "while")
     match(TokenClass.DELIMITADOR, "(")
 
-    # Obter a expressão condicional do loop while
     condition = expression()
 
     match(TokenClass.DELIMITADOR, ")")
 
-    # Obter o corpo do loop while
     body = statement()
 
-    # Adicionar a lógica de tradução aqui, se necessário
     python_code = f"while {condition}:"
     python_code += f"\n\t{body}"
+    # indentation_block = '\n'.join(['\t' + line for line in body.split('\n')])
+    # python_code += f"\n{indentation_block}"
 
     return python_code
 
@@ -214,9 +220,7 @@ def block():
 def exprStmt():
     content = expression()
     match(TokenClass.DELIMITADOR, ";")
-    # Adicione a lógica de tradução
     python_code = f"{content}"
-    # print(python_code)
     return python_code
 
 
@@ -369,7 +373,6 @@ def function():
     parameters_code = parameters()
     match(TokenClass.DELIMITADOR, ')')
     block_code = block()
-    # Adicione a lógica de tradução aqui, se necessário
     python_code = f"def {identifier}{parameters_code}:"
     python_code += f"\n{block_code}"
     return python_code
